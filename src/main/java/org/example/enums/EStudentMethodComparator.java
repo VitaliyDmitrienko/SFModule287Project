@@ -1,0 +1,9 @@
+package org.example.enums;
+
+public enum EStudentMethodComparator {
+    STUDENT_FULL_NAME_COMPARATOR,
+    STUDENT_UNIVERSITY_ID_COMPARATOR,
+    STUDENT_CURRENT_COURSE_COMPARATOR,
+    STUDENT_AVG_EXAM_SCORE_COMPARATOR
+
+}
