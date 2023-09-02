@@ -16,9 +16,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 public final class XLSXFileReader {
+
+    private static final Logger logger = Logger.getLogger(XLSXFileReader.class.getName());
 
     private XLSXFileReader () {
         System.out.println("Private constructor.");
@@ -26,6 +31,9 @@ public final class XLSXFileReader {
     }
 
     public static ArrayList<Student> getStudentData() throws IOException {
+
+        logger.log(Level.INFO, "Excel reading started");
+
 
         ArrayList<Student> studentDataStorageExtractor = new ArrayList<>();
         FileInputStream fileXLSX = null;
@@ -51,7 +59,8 @@ public final class XLSXFileReader {
 
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Excel reading failed", e);
+//            e.printStackTrace();
         }
 
         // пропускаем заголовок таблицы 0-строку
@@ -83,8 +92,11 @@ public final class XLSXFileReader {
         try {
             fileXLSX.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Excel closing failed", e);
+//            e.printStackTrace();
         }
+
+        logger.log(Level.INFO, "Excel reading finished successfully");
 
         return studentDataStorageExtractor;
     }
@@ -92,6 +104,9 @@ public final class XLSXFileReader {
 
 
     public static ArrayList<University> getUniversityData () throws IOException {
+
+        logger.log(Level.INFO, "Excel reading started");
+
 
         ArrayList<University> universityDataStorageExtractor = new ArrayList<>();
         FileInputStream fileXLSX = null;
@@ -118,8 +133,9 @@ public final class XLSXFileReader {
 
 
         } catch (FileNotFoundException e) {
+            logger.log(Level.SEVERE, "Excel reading failed", e);
 //            throw new RuntimeException(e);
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
 //        пропускаем заголовок таблицы (0-строку)
@@ -154,8 +170,11 @@ public final class XLSXFileReader {
         try {
             fileXLSX.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Excel closing failed", e);
+//            e.printStackTrace();
         }
+
+        logger.log(Level.INFO, "Excel reading finished successfully");
 
         return universityDataStorageExtractor;
 

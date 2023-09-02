@@ -1,4 +1,4 @@
-// Module 27.8 intermediate project (Statistics: Student/University)
+// Module 287 intermediate project (Logging: Statistics: Student/University)
 package org.example;
 
 
@@ -14,11 +14,32 @@ import org.example.utils.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.INFO;
+
 
 
 public class Main {
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) throws IOException {
+
+        String outputFilePath = "src\\main\\resources\\StatisticsOutput.xlsx";
+        String loggingConfigFilePath = "src\\main\\resources\\logging.properties";
+
+
+        try {
+            LogManager.getLogManager().readConfiguration(
+                    Main.class.getResourceAsStream(loggingConfigFilePath));
+//                    Main.class.getResourceAsStream("/logging.properties"));
+        } catch (IOException e) {
+            System.err.println("Could not setup logger configuration: " + e.toString());
+        }
+
+        logger.log(INFO, "Application started, Logger configured");
+
 
 //        Utility  Class XLSXFileReader() has private constructor & forbidden to create instance
 //        System.out.println(new XLSXFileReader());
@@ -34,8 +55,6 @@ public class Main {
 
 //        Utility Class StatisticsGeneratorNew() has private constructor & forbidden to create instance
 //        System.out.println(new StatisticsGeneratorNew());
-
-        String outputFilePath = "src\\main\\resources\\StatisticsOutput.xlsx";
 
 
         List<Student> studentDataStorage = new ArrayList<>(XLSXFileReader.getStudentData());
@@ -53,6 +72,8 @@ public class Main {
         System.out.println(finalStatistics);
 
         XLSXFileWriter.generateStatistics(finalStatistics, outputFilePath);
+
+        logger.log(INFO, "Application finished");
 
 
 

@@ -9,13 +9,22 @@ import org.example.models.Statistics;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class XLSXFileWriter {
+
+    private static final Logger logger = Logger.getLogger(XLSXFileWriter.class.getName());
+
     private XLSXFileWriter () {
         System.out.println("Private constructor.");
         System.out.println("Forbidden to create this class instance.");
     }
     public static void generateStatistics(List<Statistics> statisticsList, String outputFilePath) throws IOException {
+
+        logger.log(Level.INFO, "Excel writing started");
+
         try (XSSFWorkbook workbook = new XSSFWorkbook()) {
 
             Sheet sheet = workbook.createSheet("Statistics");
@@ -90,10 +99,11 @@ public class XLSXFileWriter {
             try (FileOutputStream out = new FileOutputStream(outputFilePath)) {
                 workbook.write(out);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "New excel file writing failed", e);
+//                e.printStackTrace();
             }
         }
-        System.out.println("Excel file: \"" + outputFilePath +  "\" successful created!");
-
+//        System.out.println("Excel file: \"" + outputFilePath +  "\" successful created!");
+        logger.log(Level.INFO, "Excel writing finished successfully");
     }
 }
