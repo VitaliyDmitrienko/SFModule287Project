@@ -97,6 +97,7 @@ public final class XLSXFileReader {
         }
 
         logger.log(Level.INFO, "Excel reading finished successfully");
+        logger.log(Level.FINE, "Excel fine reading finished successfully");
 
         return studentDataStorageExtractor;
     }
@@ -175,6 +176,7 @@ public final class XLSXFileReader {
         }
 
         logger.log(Level.INFO, "Excel reading finished successfully");
+        logger.log(Level.FINE, "Excel fine reading finished successfully");
 
         return universityDataStorageExtractor;
 

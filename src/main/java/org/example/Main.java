@@ -14,9 +14,11 @@ import org.example.utils.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
 
 
@@ -32,8 +34,8 @@ public class Main {
 
         try {
             LogManager.getLogManager().readConfiguration(
-                    Main.class.getResourceAsStream(loggingConfigFilePath));
-//                    Main.class.getResourceAsStream("/logging.properties"));
+//                    Main.class.getResourceAsStream(loggingConfigFilePath));
+                    Main.class.getResourceAsStream("/logging.properties"));
         } catch (IOException e) {
             System.err.println("Could not setup logger configuration: " + e.toString());
         }
@@ -69,11 +71,17 @@ public class Main {
 
         List<Statistics> finalStatistics = StatisticsGeneratorNew.statisticsCreator(studentDataStorage, universityDataStorage);
 //        List<Statistics> finalStatistics = StatisticsGeneratorOld.statisticsCreator(studentDataStorage, universityDataStorage);
-        System.out.println(finalStatistics);
+//        System.out.println(finalStatistics);
+
+        logger.log(Level.INFO, "Statistics output generated finished successfully: ", finalStatistics);
 
         XLSXFileWriter.generateStatistics(finalStatistics, outputFilePath);
 
-        logger.log(INFO, "Application finished");
+//        System.out.println("check");
+
+        logger.log(Level.FINE, "Application fine finished");
+        logger.log(Level.INFO, "Application finished");
+        logger.fine( "Application fine finished");
 
 
 

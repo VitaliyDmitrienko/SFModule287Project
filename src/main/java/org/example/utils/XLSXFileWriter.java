@@ -105,5 +105,6 @@ public class XLSXFileWriter {
         }
 //        System.out.println("Excel file: \"" + outputFilePath +  "\" successful created!");
         logger.log(Level.INFO, "Excel writing finished successfully");
+        logger.log(Level.FINE, "Excel fine writing finished successfully");
     }
 }
